@@ -1,18 +1,14 @@
 provider "azurerm" {
-    features {}
+  features {}
 }
-resource "azurerm_resource_group" "Netflix" {
-    name = "Netflix-RG"
-    location = "uk south"
-}
-module "uk-london" {
-    source = "./London/"
-    resource_group_name = azurerm_resource_group.Netflix.name
-    resource_group_location = azurerm_resource_group.Netflix.location
-    resource_group_tags = "Production"
-}
-module "uk-Mon"{
-    source = "./London/Monitor"
-    resource_group_name = azurerm_resource_group.Netflix.name
-    resource_group_location = azurerm_resource_group.Netflix.location
+
+module "asia-ss" {
+    source = "./times"
+    environment = "production"
+    location = "eastasia"
+    time_zone = "GMT Standard Time"
+    out_hour = 22
+    out_minute = 30
+    in_hour = 2
+    in_minute = 30
 }
